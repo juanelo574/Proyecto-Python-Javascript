@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestión de Productos</title>
-    <script defer src="/static/script.js"></script>
+    <script type="module" src="/static/js/main.js" defer></script>
     <link rel="stylesheet" href="/static/styles.css" />
 </head>
 
@@ -24,6 +24,14 @@
     </div>
     <div id="product-list">
     </div>
+
+    <form id="form-comentario">
+        <h2>Deja un Comentario</h2>
+        <input type="number" id="idProducto" placeholder="ID del producto" required />
+        <input type="text" id="usuario-comentario" placeholder="Tu nombre" required />
+        <textarea id="texto-comentario" placeholder="Tu comentario" required></textarea>
+        <button type="submit">Enviar Comentario</button>
+    </form>
 
 
 </body>
