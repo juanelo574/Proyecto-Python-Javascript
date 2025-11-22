@@ -2,7 +2,6 @@ import {
     eliminarProducto as eliminarProductoAPI,
     habilitarProducto as habilitarProductoAPI,
     obtenerComentarios,
-    obtenerProductos,
 } from "../api.js";
 
 import { cargarProductos } from "../utils.js";

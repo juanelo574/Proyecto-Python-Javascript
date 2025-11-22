@@ -24,7 +24,8 @@ def home():
 def productos():
     with open("data.json", "r") as archivo:
         data = json.load(archivo)
-    return jsonify(data["productos"])
+    productos = data["productos"]
+    return jsonify(productos)
 
 
 # Ruta post para crear un nuevo producto

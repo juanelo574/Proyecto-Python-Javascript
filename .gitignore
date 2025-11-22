@@ -1,9 +1,17 @@
+# entorno virtual
 venv/
-.DS_Store
 __pycache__/
+
+
+# archivos temporales
 *.pyc
+*.pyo
+*.log
+
+# configuraciones del sistema
+.DS_Store
+Thumbs.db
 .env
-.idea/
-.vscode/
-node_modules/
+
+# Subidas de imagenes
 static/uploads/
