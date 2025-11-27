@@ -29,17 +29,6 @@ pip install -r requirements.txt
 python app.py
 ```
 
-## Estructura del proyecto
-
-flask_javascript/
-|
-|------ app.py
-|------ static
-|------ js
-|------ uploads
-|------ templates
-|------ data.json
-
 ## Despligue
 
-Link: [https://python-javascript-seccion-a.onrender.com/](Aplicacion de Productos)
+Link: [Aplicacion en Render](https://python-javascript-seccion-a.onrender.com/)
