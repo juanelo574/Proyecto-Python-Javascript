@@ -22,9 +22,15 @@ def home():
 # Lectura de productos desde un archivo JSON
 @app.route("/productos", methods=["GET"])
 def productos():
+    search = request.args.get("search", "")
     with open("data.json", "r") as archivo:
         data = json.load(archivo)
-    productos = data["productos"]
+    productos = data.get("productos", [])
+
+    if search and search.strip() != "":
+        q = search.strip().lower()
+        productos = [p for p in productos if q in (p.get("nombre", "") or "").lower()]
+
     return jsonify(productos)
 
 
@@ -83,26 +89,57 @@ def eliminar_producto(id):
 # Actualizar un producto por ID
 @app.route("/productos/<int:id>", methods=["PUT"])
 def actualizar_producto(id):
-    data_actualizada = request.get_json()
+    # Permitir recibir JSON o multipart/form-data (para actualizar imagen)
+    nombre = None
+    precio = None
+    imagen = None
+
+    if request.files and "imagen" in request.files:
+        # multipart form
+        nombre = request.form.get("nombre")
+        precio = request.form.get("precio")
+        imagen = request.files.get("imagen")
+    else:
+        # JSON
+        data_actualizada = request.get_json() or {}
+        nombre = data_actualizada.get("nombre")
+        precio = data_actualizada.get("precio")
+
     with open("data.json", "r+") as archivo:
         data = json.load(archivo)
         productos = data["productos"]
         producto_a_actualizar = next((p for p in productos if p["id"] == id), None)
 
-        if producto_a_actualizar:
-            producto_a_actualizar.update(data_actualizada)
-            archivo.seek(0)
-            archivo.truncate()
-            json.dump(data, archivo, indent=4)
-            return (
-                jsonify(
-                    message=f"Producto con ID {id} actualizado exitosamente",
-                    producto=producto_a_actualizar,
-                ),
-                200,
-            )
-        else:
+        if not producto_a_actualizar:
             return jsonify(message=f"Producto con ID {id} no encontrado"), 404
+
+      
+        if nombre is not None and nombre != "":
+            producto_a_actualizar["nombre"] = nombre
+
+        if precio is not None and precio != "":
+            try:
+                producto_a_actualizar["precio"] = float(precio)
+            except Exception:
+                pass
+
+        if imagen:
+            filename = secure_filename(imagen.filename)
+            ruta_imagen = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            imagen.save(ruta_imagen)
+            producto_a_actualizar["imagen"] = ruta_imagen
+
+        archivo.seek(0)
+        archivo.truncate()
+        json.dump(data, archivo, indent=4)
+
+        return (
+            jsonify(
+                message=f"Producto con ID {id} actualizado exitosamente",
+                producto=producto_a_actualizar,
+            ),
+            200,
+        )
 
 
 # Habilitar y deshabilitar productos

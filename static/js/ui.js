@@ -17,12 +17,17 @@ export function mostrarMensaje(texto, tipo = "info") {
 }
 
 export function limpiarFormularioProducto() {
-    const nombre = document.getElementById("nombre");
-    const precio = document.getElementById("precio");
-    const imagen = document.getElementById("imagen");
+    const nombre = document.getElementById("nombre-producto");
+    const precio = document.getElementById("precio-producto");
+    const imagen = document.getElementById("imagen-producto");
+    const editar = document.getElementById("editar");
+    const btnSubmit = document.getElementById("btn-submit-product");
     if (nombre) nombre.value = "";
     if (precio) precio.value = "";
     if (imagen) imagen.value = "";
+    if (editar) editar.value = "";
+    if (btnSubmit) btnSubmit.textContent = "Agregar";
+    if (imagen) imagen.required = true;
 }
 
 export function limpiarFormularioComentario() {

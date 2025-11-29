@@ -72,6 +72,14 @@ class ProductCard extends HTMLElement {
                     background: ${habilitado ? "gray" : "green"};
                 }
 
+                #btnEditar {
+                    background: #3b82f6;
+                }
+
+                #btnEditar:hover {
+                    background: #1d4ed8;
+                }
+
                 .comentarios {
                     grid-column: 1 / 4;
                     margin-top: 6px;
@@ -101,6 +109,7 @@ class ProductCard extends HTMLElement {
                         <span class="id">ID: ${id}</span>
                     </div>
                     <div class="actions">
+                        <button id="btnEditar">Editar</button>
                         <button id="btnHabilitar">
                         ${habilitado ? "Deshabilitar" : "Habilitar"}
                         </button>
@@ -124,6 +133,15 @@ class ProductCard extends HTMLElement {
 
         this.shadowRoot.getElementById("btnEliminar").addEventListener("click", async () => {
             eliminarProducto(id);
+        });
+        this.shadowRoot.getElementById("btnEditar").addEventListener("click", async () => {
+            this.dispatchEvent(
+                new CustomEvent("editar-producto", {
+                    detail: { id, nombre, precio, imagen },
+                    bubbles: true,
+                    composed: true,
+                })
+            );
         });
         this.shadowRoot.getElementById("btnHabilitar").addEventListener("click", async () => {
             habilitarProducto(id);

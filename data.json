@@ -2,14 +2,34 @@
     "productos": [
         {
             "id": 2,
-            "nombre": "iPad",
-            "precio": 3000.0,
-            "imagen": "static/uploads/ipad_air.avif",
+            "nombre": "Iphad",
+            "precio": 1000.0,
+            "imagen": "static/uploads\\Iphad.jpg",
             "habilitado": true,
             "comentarios": [
                 {
                     "usuario": "Kevin",
                     "texto": "Hola, muy buen producto"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "nombre": "Iphone",
+            "precio": 6252.0,
+            "imagen": "static/uploads\\Iphone.jpg",
+            "habilitado": true
+        },
+        {
+            "id": 4,
+            "nombre": "computadora php",
+            "precio": 9785.0,
+            "imagen": "static/uploads\\computadora.jpg",
+            "habilitado": true,
+            "comentarios": [
+                {
+                    "usuario": "Antonio sarce\u00f1o",
+                    "texto": "5 estrellas"
                 }
             ]
         }

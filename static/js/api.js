@@ -1,7 +1,10 @@
 // api.js - Todas las funciones relacionadas con llamadas a la API (Las que interactuan con Flask)
 
-export async function obtenerProductos() {
-    const response = await fetch("/productos");
+export async function obtenerProductos(search = "") {
+    const url = search && search.trim() ? `/productos?search=${encodeURIComponent(
+        search.trim()
+    )}` : "/productos";
+    const response = await fetch(url);
     if (!response.ok) throw new Error("Error al obtener los productos");
     return await response.json();
 }
@@ -43,5 +46,19 @@ export async function agregarComentario(id, data) {
         body: JSON.stringify(data),
     });
     if (!response.ok) throw new Error("Error al agregar el comentario");
+    return await response.json();
+}
+
+export async function actualizarProducto(id, data) {
+    const options = { method: "PUT" };
+    if (data instanceof FormData) {
+        options.body = data;
+    } else {
+        options.headers = { "Content-Type": "application/json" };
+        options.body = JSON.stringify(data);
+    }
+
+    const response = await fetch(`/productos/${id}`, options);
+    if (!response.ok) throw new Error("Error al actualizar el producto");
     return await response.json();
 }

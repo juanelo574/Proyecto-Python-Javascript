@@ -15,13 +15,22 @@
         <p>App construida con <strong>Flask + JavaScript</strong></p>
     </header>
 
+      <section class="panel">
+        <h2>Buscar Producto</h2>
+        <form id="form-buscar">
+            <input type="text" id="buscar-producto" placeholder="Nombre del producto" required />
+            <button type="submit">Buscar</button>
+        </form>
+    </section>
+    
     <section class="panel">
         <h2>Agregar producto</h2>
         <form id="form-product" enctype="multipart/form-data">
+            <input type="hidden" id="editar" />
             <input type="text" id="nombre-producto" placeholder="Nombre del producto" required />
             <input type="number" id="precio-producto" placeholder="Precio del producto" required />
             <input type="file" id="imagen-producto" accept="image/*" required />
-            <button type="submit">Agregar</button>
+            <button type="submit" id="btn-submit-product">Agregar</button>
         </form>
     </section>
 

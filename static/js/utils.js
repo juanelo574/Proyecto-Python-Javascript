@@ -1,6 +1,6 @@
 import { obtenerProductos } from "./api.js";
 
-export async function cargarProductos() {
+export async function cargarProductos(filtroNombre = "") {
     const contenedor = document.getElementById("product-list");
     contenedor.innerHTML = "";
 
@@ -8,10 +8,10 @@ export async function cargarProductos() {
     loader.style.display = "block";
 
     try {
-        const productos = await obtenerProductos();
+        const productos = await obtenerProductos(filtroNombre);
         loader.style.display = "none";
 
-        if (productos.length === 0) {
+        if (!productos || productos.length === 0) {
             contenedor.innerHTML = "<p>No hay productos disponibles.</p>";
             return;
         }
