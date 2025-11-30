@@ -18,7 +18,13 @@
             "nombre": "Iphone",
             "precio": 6252.0,
             "imagen": "static/uploads\\Iphone.jpg",
-            "habilitado": true
+            "habilitado": true,
+            "comentarios": [
+                {
+                    "usuario": "buen telefono",
+                    "texto": "6 estrellas"
+                }
+            ]
         },
         {
             "id": 4,
